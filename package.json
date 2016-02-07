@@ -1,0 +1,42 @@
+{
+  "name": "cycle-simple-mqtt-driver",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "author": "Mark 'kaosat-dev' Moissette",
+  "license": "MIT",
+  "dependencies": {
+    "rx": "^4.0.6",
+    "mqtt":""
+  },
+  "devDependencies": {
+    "babel-cli": "^6.2.0",
+    "babel-core": "^6.2.1",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "mocha": "^2.3.4",
+    "watchify": "^3.6.1"
+  },
+  "scripts": {
+    "browserify": "browserify src/index  -t babelify --o dist/index.js",
+    "build": "npm run browserify",
+    "compile-lib": "babel -d lib/ src/",
+    "watch": "watchify src/index  -t babelify --o dist/index.js -v -d",
+    "mocha": "mocha test --compilers js:babel-core/register",
+    "test": "npm run mocha",
+    "release": "npm run release-patch",
+    "release-patch": "git checkout master ; npm version patch && git push origin master --tags ",
+    "release-minor": "git checkout master ; npm version patch && git push origin master --tags ",
+    "release-major": "git checkout master ; npm version patch && git push origin master --tags "
+  },
+  "browserify-shim": {
+    "rx": "global:Rx"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  }
+}
