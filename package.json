@@ -1,5 +1,5 @@
 {
-  "name": "cycle-simple-mqtt-driver",
+  "name": "cycle-mqtt-driver",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
