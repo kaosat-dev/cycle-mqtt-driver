@@ -2,7 +2,7 @@
   "name": "cycle-mqtt-driver",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "author": "Mark 'kaosat-dev' Moissette",
   "license": "MIT",
   "dependencies": {
@@ -22,7 +22,7 @@
   "scripts": {
     "browserify": "browserify src/index  -t babelify --o dist/index.js",
     "build": "npm run browserify",
-    "compile-lib": "babel -d lib/ src/",
+    "compile-lib": "babel --presets es2015 -d lib/ src/",
     "watch": "watchify src/index  -t babelify --o dist/index.js -v -d",
     "mocha": "mocha test --compilers js:babel-core/register",
     "test": "npm run mocha",
