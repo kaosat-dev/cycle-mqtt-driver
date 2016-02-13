@@ -1,13 +1,13 @@
 {
   "name": "cycle-mqtt-driver",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "lib/index.js",
   "author": "Mark 'kaosat-dev' Moissette",
   "license": "MIT",
   "dependencies": {
     "rx": "^4.0.6",
-    "mqtt":""
+    "mqtt": ""
   },
   "devDependencies": {
     "babel-cli": "^6.2.0",
