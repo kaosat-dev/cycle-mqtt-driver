@@ -66,7 +66,6 @@ describe("mqtt-driver", function() {
       .delay(100)
     mqttDriver(out$)
 
-    
   })
 
 })
