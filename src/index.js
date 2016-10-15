@@ -1,41 +1,27 @@
-//import Rx from 'rx'
-const Rx   = require('rx')
-const mqtt = require('mqtt')
-const makeServer = require('./server')
+import mqtt from 'mqtt'
+import {create} from '@most/create'
 
-module.exports = function makeMqttDriver({host, port, mode='client'}){
+export default function makeMqttDriver ({ host, port }) {
+  const client = mqtt.connect({ host, port, clientId:'foobaz' })
 
-  let server = undefined
-  if(mode === 'server'){
-    server = makeServer().listen(port)
-  }
-
-  const client = mqtt.connect( { host, port } )
-
-  function get(topic) {
+  function get (topic) {
     client.subscribe(topic)
 
-    return Rx.Observable.create(observer => {
-        client.on('message', function (_topic, message) {
-          if(topic === _topic){
-            observer.onNext(message)
-          }
-        })
-
-        return function dispose() {
-          //not sure how to deal with dispoe ?
-          //perhaps like this ? client.unsubscribe(topic) IF and only if there are no ne left
+    return create((add, end, error) => {
+      client.on('message', function (_topic, message) {
+        if (topic === _topic) {
+          add(message)
         }
+      })
     })
   }
 
-  function publish({topic, message}) {
+  function publish ({topic, message}) {
     client.publish(topic, message)
   }
 
-  return function mqttDriver(events$) {
+  return function mqttDriver (events$) {
     events$.forEach(event => publish(event))
     return {get}
   }
-
 }
