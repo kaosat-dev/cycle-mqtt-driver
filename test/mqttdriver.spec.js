@@ -23,7 +23,7 @@ test.cb('lets you subscribe to topics', t => {
   })
 })
 
-test('lets you send messages to topics', t => {
+test.cb('lets you send messages to topics', t => {
   const server = mqttServer({port: 1982})
 
   const mqttDriver = makeMqttDriver({host: 'localhost', port: 1982})
